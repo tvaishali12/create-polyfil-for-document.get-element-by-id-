@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <body>
+    <div id="container">
+      <div>1</div>
+
+      <div>
+        2
+        <div id="inner-container">
+          <div id="message"><div id="name">vaishali thakur</div></div>
+        </div>
+      </div>
+    </div>
+    <div id="hello">hello</div>
+  </body>
+  <script>
+    // interview question
+    // create polyfil for document.get element by id()
+
+    let result = "";
+    const getElementById = (bodyElement, idName) => {
+      // console.log(bodyElement); //  gettting body
+
+      Object.keys(bodyElement.children).forEach((child) => {
+        // [0,1,2]
+        // iterating a loop on body  parent element
+        // console.log(bodyElement.children); // getting parent div in array
+
+        const childNode = bodyElement.children[child];
+        // console.log(childNode); // parent divs of body not body
+
+        const getAttrbute = childNode.getAttribute("id"); // getting id only
+        if (getAttrbute === idName) {
+          result = childNode;
+        }
+        getElementById(childNode, idName); // checking  div nestedly
+      });
+      return result;
+    };
+    console.log(getElementById(document.body, "name").innerHTML);
+    console.log("result", result);
+
+    const checkId = document.getElementById("name").innerHTML;
+    console.log("checkId :", checkId);
+    //----------------------------------------------------------------------
+  </script>
+</html>
